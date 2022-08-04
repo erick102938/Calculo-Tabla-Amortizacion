@@ -1,0 +1,11 @@
+package com.cmc.evaluacion.parteC_servicios;
+
+import com.cmc.evaluacion.parteC_entidades.Prestamo;
+
+public class TestCalculadoraTabla2 {
+	public static void main(String[] args) {
+		Prestamo prestamo = new Prestamo(5000, 12, 15);
+		CalculadoraAmortizacion.generarTabla(prestamo);
+		CalculadoraAmortizacion.mostrarTabla(prestamo);
+	}
+}

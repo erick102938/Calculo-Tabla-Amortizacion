@@ -1,0 +1,58 @@
+package com.cmc.evaluacion.parteC_entidades;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import exceptions.DuplicatedException;
+import exceptions.NotFoundException;
+
+public class Banco {
+	private HashMap<String, ArrayList<Prestamo>> prestamos = new HashMap<String, ArrayList<Prestamo>>();
+	private ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+
+	public HashMap<String, ArrayList<Prestamo>> getPrestamos() {
+		return prestamos;
+	}
+
+	public void setPrestamos(HashMap<String, ArrayList<Prestamo>> prestamos) {
+		this.prestamos = prestamos;
+	}
+
+	public ArrayList<Cliente> getClientes() {
+		return clientes;
+	}
+
+	public void setClientes(ArrayList<Cliente> clientes) {
+		this.clientes = clientes;
+	}
+
+	public Cliente buscarCliente(String cedulaCliente){
+		for(Cliente cliente: clientes){
+			if(cliente.getCedula().equals(cedulaCliente)){
+				return cliente;
+			}
+		}
+		return null;
+	}
+	public void registrarCliente(Cliente nuevoCliente) throws DuplicatedException{
+		if(buscarCliente(nuevoCliente.getCedula())==null){
+			clientes.add(nuevoCliente);
+		}else{
+			throw new DuplicatedException("el cliente ya existe");
+		}
+	}
+	public void asignarPrestamo(String cedulaCliente,Prestamo prestamo) throws NotFoundException{
+		if(buscarCliente(cedulaCliente)!=null){
+			if(prestamos.get(cedulaCliente)==null){
+				ArrayList<Prestamo> prestamosCliente = new ArrayList<Prestamo>();
+				prestamosCliente.add(prestamo);
+				prestamos.put(cedulaCliente,prestamosCliente);
+			}else{
+				
+			}
+
+		}else{
+			throw new NotFoundException("no es cliente del banco");
+		}
+	}
+}

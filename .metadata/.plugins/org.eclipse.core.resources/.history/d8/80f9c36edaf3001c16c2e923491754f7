@@ -1,0 +1,10 @@
+package com.cmc.evaluacion.parteC_entidades;
+
+public class Couta {
+	private int numero;
+	private double cuota;
+	private double capitalInicio;
+	private double interes;
+	private double abonoCapital;
+	private double saldo;
+}

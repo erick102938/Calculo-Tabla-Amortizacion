@@ -1,0 +1,16 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+public class ConnectionDataBase {
+    public static Connection connectDataBase(String serverName,String portNumber,String databaseName,String username,String password){
+        String connectionUrl = "jdbc:sqlserver://" + serverName + ":" + portNumber + ";" + "databaseName="
+                + databaseName + ";username=" + username + ";password=" + password + ";encrypt=true;trustServerCertificate=true;";
+        try {
+            Connection conn = DriverManager.getConnection(connectionUrl);
+            return  conn;
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+}

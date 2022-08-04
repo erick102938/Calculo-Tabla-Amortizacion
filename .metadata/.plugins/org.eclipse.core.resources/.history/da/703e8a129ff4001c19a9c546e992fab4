@@ -1,0 +1,7 @@
+package com.cmc.evaluacion.parteC_entidades;
+
+public class AdminPagos {
+	public static void pagar(String codigoPrestamo, double montoCancelar){
+		
+	}
+}

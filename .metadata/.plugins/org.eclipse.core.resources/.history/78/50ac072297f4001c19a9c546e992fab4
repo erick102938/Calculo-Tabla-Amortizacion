@@ -1,0 +1,48 @@
+package com.cmc.rest;
+
+import java.util.ArrayList;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import com.cmc.evaluacion.parteC_entidades.Couta;
+import com.cmc.evaluacion.parteC_entidades.Prestamo;
+import com.cmc.evaluacion.parteC_servicios.CalculadoraAmortizacion;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+
+
+
+@Path("/servicios")
+public class ServiciosWeb {
+	
+	private static final ObjectMapper mapper = new ObjectMapper();
+	
+	@Path("/simulacion-prestamo")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public static javax.ws.rs.core.Response simularPrestamo(Object entradaDatos){
+		double monto, interesAnual;
+		int plazo;
+		String tipo;
+		
+		ObjectNode json = mapper.createObjectNode();
+		json.put("prestamo", entradaDatos.toString());
+		/*.get("monto").asDouble();
+		interesAnual = json.get("prestamo").get("interesAnual").asDouble();
+		plazo = json.get("prestamo").get("plazo").asInt();
+		tipo = json.get("prestamo").get("tipo").asText();*/
+		System.out.print(json.get("prestamo").get(0));
+		/*
+		Prestamo prestamo = new Prestamo(monto,interesAnual,plazo);
+		CalculadoraAmortizacion.generarTabla(prestamo,tipo);
+		Couta[] coutas = prestamo.getCuotas();*/
+		return javax.ws.rs.core.Response.status(200).entity(json).build();
+	}
+}

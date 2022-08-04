@@ -1,0 +1,6 @@
+package com.cmc.evaluacion.parteC_commons;
+
+public class TipoAmortizacion {
+	public static String FRANCESA = "FR";
+	public static String ALEMANA = "AL";
+}

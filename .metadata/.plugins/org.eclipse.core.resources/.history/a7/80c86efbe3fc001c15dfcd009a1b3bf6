@@ -1,0 +1,5 @@
+package com.cmc.dbase;
+
+public class ConnectionDataBase {
+
+}

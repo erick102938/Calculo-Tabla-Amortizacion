@@ -1,0 +1,34 @@
+package com.cmc.evaluacion.parteC_servicios;
+
+import com.cmc.evaluacion.parteC_entidades.Couta;
+import com.cmc.evaluacion.parteC_entidades.Prestamo;
+
+public class CalculadoraAmortizacion {
+	public static double calcularCuota(Prestamo prestamo){
+		double interes = prestamo.getInteres()/(12*100);
+		return (prestamo.getMonto()*interes)/(1-Math.pow(1+interes,-1*prestamo.getPlazo()));
+	}
+	public static void generarTabla(Prestamo prestamo){
+		double valorCouta = calcularCuota(prestamo);
+		prestamo.cuotas[0] = new Couta(1);
+		prestamo.cuotas[0].setCuota(valorCouta);
+		prestamo.cuotas[0].setCapitalInicio(prestamo.getMonto());
+		prestamo.cuotas[0].setInteres(prestamo.getInteres()/(12*100));
+		prestamo.cuotas[0].setAbonoCapital(valorCouta-prestamo.getInteres());
+		prestamo.cuotas[0].setSaldo(prestamo.getMonto()-valorCouta-prestamo.getInteres());
+		for(int i=1;i<prestamo.cuotas.length;i++){
+			prestamo.cuotas[i] = new Couta(i+1);
+			prestamo.cuotas[i].setCuota(valorCouta);
+			prestamo.cuotas[i].setCapitalInicio(prestamo.cuotas[i-1].getSaldo());
+			prestamo.cuotas[i].setInteres(prestamo.cuotas[i].getCapitalInicio()*(prestamo.getInteres()/(12*100)));
+			prestamo.cuotas[i].setAbonoCapital(valorCouta-prestamo.cuotas[i-1].getInteres());
+			prestamo.cuotas[i].setSaldo(prestamo.cuotas[i].getCapitalInicio()-prestamo.cuotas[i].getAbonoCapital());
+		}
+	}
+	public static void mostrarTabla(Prestamo prestamo){
+		Couta[] coutas = prestamo.getCuotas();
+		for(int i=0;i<prestamo.cuotas.length;i++){
+			System.out.print("\n"+coutas[i].toString());
+		}
+	}
+}

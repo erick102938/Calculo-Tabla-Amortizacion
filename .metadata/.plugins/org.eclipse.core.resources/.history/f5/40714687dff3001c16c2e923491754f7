@@ -1,0 +1,13 @@
+package com.cmc.evaluacion.parteC_servicios;
+
+import com.cmc.evaluacion.parteC_entidades.Prestamo;
+
+public class TestCacluadoraTabla {
+	private void mai() {
+		// TODO Auto-generated method stub
+		Prestamo prestamo = new Prestamo(5000, 12, 12);
+		CalculadoraAmortizacion.generarTabla(prestamo);
+		CalculadoraAmortizacion.mostrarTabla(prestamo);
+
+	}
+}

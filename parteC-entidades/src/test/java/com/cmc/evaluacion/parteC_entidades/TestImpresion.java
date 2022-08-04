@@ -1,0 +1,13 @@
+package com.cmc.evaluacion.parteC_entidades;
+
+public class TestImpresion {
+	public static void main(String[] args) {
+		Couta couta = new Couta(1);
+		couta.setCuota(444.24);
+		couta.setCapitalInicio(5000);
+		couta.setInteres(50);
+		couta.setAbonoCapital(394.24134);
+		couta.setSaldo(4605.76143);
+		System.out.print(couta.toString());
+	}
+}

@@ -1,0 +1,35 @@
+package com.cmc.evaluacion.parteC_servicios;
+
+import java.util.ArrayList;
+
+import com.cmc.evaluacion.parteC_entidades.Banco;
+import com.cmc.evaluacion.parteC_entidades.Cliente;
+import com.cmc.evaluacion.parteC_entidades.Prestamo;
+
+import exceptions.DuplicatedException;
+import exceptions.NotFoundException;
+
+public class TestBanco {
+	public static void main(String[] args) {
+		Banco b=new Banco();
+		try {
+			b.registrarCliente(new Cliente("1714616123", "Camilo", "Cuesta"));
+			b.registrarCliente(new Cliente("0514616123", "Ramiro", "Cuesta"));
+			b.asignarPrestamo("0514616123", new Prestamo(1000,12, 18));
+			b.asignarPrestamo("0514616123", new Prestamo(5000,15, 24));
+			b.asignarPrestamo("1714616123", new Prestamo(3000,15, 24));
+		} catch (DuplicatedException e) {
+			e.printStackTrace();
+		}catch(NotFoundException e){
+			e.printStackTrace();
+		}
+		ArrayList<Prestamo> prestamos=b.buscarPrestamos("0514616123");
+		for(Prestamo prestamo: prestamos){
+			System.out.print(prestamo.toString());
+		}
+		for (String cedula:b.getPrestamos().keySet()) {
+		    System.out.println(b.getPrestamos().get(cedula),cedula);
+		}
+		
+	}
+}

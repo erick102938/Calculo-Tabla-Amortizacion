@@ -1,0 +1,37 @@
+package com.cmc.evaluacion.parteC_servicios;
+
+import java.util.ArrayList;
+
+import com.cmc.evaluacion.parteC_commons.TipoAmortizacion;
+import com.cmc.evaluacion.parteC_entidades.Couta;
+import com.cmc.evaluacion.parteC_entidades.Prestamo;
+
+import exceptions.NotFoundException;
+
+public class AdminPagos {
+	public static void pagar(ArrayList<Prestamo> prestamosCliente,String codigoPrestamo, double montoCancelar){
+		double monto = montoCancelar;
+		for(Prestamo prest: prestamosCliente){
+			if(prest.getCodigo().equals(codigoPrestamo)){
+				
+				Couta[] coutas = prest.getCuotas();
+				for(int i=0;i<coutas.length;i++){
+					if(!coutas[i].isPagado()&& monto>0){
+						System.out.print("\n"+ (monto-coutas[0].getPendiente()));
+						if((monto-coutas[0].getPendiente()) <= 0){
+							coutas[i].setPendiente(coutas[0].getPendiente()-monto));
+							System.out.print("\nprestamo encontrado"+monto +" "+ coutas[0].getPendiente()+ "  "+ (monto-coutas[0].getPendiente()));
+							coutas[i].setPagado(true);
+							coutas[i].setPendiente(0);
+							if(coutas[i].getPendiente()<0){
+								monto = coutas[i].getCuota()-monto;
+							}
+						}else{
+							
+						}
+					}
+				}
+			}
+		}
+	}
+}
